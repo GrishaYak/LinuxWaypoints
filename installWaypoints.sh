@@ -32,11 +32,11 @@ echo "Installation complete!"
 echo "Restart your terminal to start using wp and tp."
 
 case $1 in
-    "--stay")
+    "--clear")
+            rm waypoints.sh
+            rm -- "$0"
         ;;
     "*")
-        rm waypoints.sh
-        rm -- "$0"
         ;;
 esac
 
