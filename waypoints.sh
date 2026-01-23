@@ -1,22 +1,27 @@
 #!usr/bin/env sh
 [ -n "$WP_LOADED" ] && return
 WP_LOADED=1
-WAYPOINTS_FILE="$PWD/.waypoints"
+WAYPOINTS_FILE="/home/grishayak/cs/projects/python/LinuxWaypoints/.waypoints"
+
 WP_TEMP="$WAYPOINTS_FILE.tmp"
+
 USAGE='Usage:'
+
 RM_USAGE='
 wp rm <name>                   - remove <name> (understands regular expressions)
 wp rm <name> -n|--no-regex     - understand <name> literally'
+
 ADD_USAGE='
 wp add <name>                  - add <name> to the waypoint list'
+
 LS_USAGE='
 wp ls                          - print all waypoints'
-WP_USAGE="
-$ADD_USAGE$LS_USAGE$RM_USAGE
-Use \"tp\" to teleport to waypoints"
+
 TP_USAGE="
 tp <name>                      - teleport to waypoint named <name>"
 
+WP_USAGE="$ADD_USAGE$LS_USAGE$RM_USAGE
+$TP_USAGE"
 
 wp() {
     touch "$WAYPOINTS_FILE"
@@ -43,7 +48,7 @@ wp() {
                     regex="$(printf '%s' "$2" | sed 's/\*/.*/g; s/?/./g')"
                     grep -v -E "^$regex=" "$WAYPOINTS_FILE" > "$WP_TEMP"
 
-                    comm -13 "$WP_TEMP" "$WAYPOINTS_FILE" | cut -d= -f1 | sed 's/^/rm /g'
+                    comm -13 "$WP_TEMP" "$WAYPOINTS_FILE" | cut -d= -f1 | sed 's/^/wp rm /g'
                     
                     ok=Y
                     ;;

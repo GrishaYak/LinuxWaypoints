@@ -37,4 +37,3 @@ rm -f "$WAYPOINTS_FILE"
 
 echo "waypoints have been uninstalled"
 
-rm "$UNINS_FILE"
