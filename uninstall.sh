@@ -32,7 +32,7 @@ case "$1" in
         cat .tmp > "$SHELL_RC"
         ;;
 esac
-rm tmp
+rm .tmp
 rm -f "$WAYPOINTS_FILE" "$INS_FILE" "$SCRIPT_FILE" "$README_MD"
 
 echo "waypoints have been uninstalled"
